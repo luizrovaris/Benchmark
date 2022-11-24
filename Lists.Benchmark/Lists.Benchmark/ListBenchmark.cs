@@ -9,7 +9,7 @@ namespace Lists.Benchmark
         [Benchmark]
         public List<UserDTO> SearchObjectByCode()
         {
-            var codes = DataHelper.Codes;
+            List<string> codes = DataHelper.Codes;
 
             List<UserDTO> users = new();
             for (int i = 0; i < codes.Count; i++)
@@ -28,10 +28,11 @@ namespace Lists.Benchmark
         [Benchmark]
         public List<UserDTO> UseObjectItSelf()
         {
+            List<UserDTO> usersInMemory = DataHelper.Users;
             List<UserDTO> users = new();
-            for (int i = 0; i < DataHelper.Users.Count; i++)
+            for (int i = 0; i < usersInMemory.Count; i++)
             {
-                UserDTO? user = DataHelper.Users
+                UserDTO? user = usersInMemory
                     .FirstOrDefault(x => x.Code == i.ToString().PadLeft(3, '0'));
             }
             return users;
